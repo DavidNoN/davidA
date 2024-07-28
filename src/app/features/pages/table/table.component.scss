@@ -1,0 +1,167 @@
+
+.search-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 80px 0 15px 0;
+}
+
+input[type="search"] {
+  padding: 16px;
+  height: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 200px;
+}
+.add-button {
+  background-color: #f5df66;
+  border: none;
+  padding: 24px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 4px;
+  padding: 20px;
+  width: 80vw;
+  flex-direction: column;
+}
+
+.table-container {
+  overflow-x: auto;
+  width: 100%;
+}
+
+
+table {
+  width: 99%;
+  border-collapse: collapse;
+  min-width: 500px;
+}
+
+@media (max-width: 690px) {
+  input[type="text"] {
+    margin-left: 32px;
+    padding: 16px;
+    height: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 120px;
+  }
+  .add-button {
+    background-color: #f5df66;
+    border: none;
+    padding: 24px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 32px;
+  }
+}
+
+thead {
+  width: 100%;
+}
+
+th {
+  background-color: #f9fafc;
+  font-weight: 600;
+  height: 44.5px;
+  &:first-child {
+    text-align: center;
+    width: 100px;
+  }
+}
+
+th, td {
+  text-align: left;
+  padding: 12px;
+  font-size: 14px;
+  border-bottom: 1px solid #ddd;
+}
+
+tr > td:first-child {
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  user-select: none;
+}
+
+tr > td:last-child > .dropdown {
+  transform: rotate(90deg);
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 18px;
+  user-select: none;
+  text-align: center;
+}
+.logo-placeholder {
+  width: 40px;
+  height: 40px;
+  background-color: #ddd;
+  border-radius: 50%;
+  display: inline-block;
+}
+.info_icon {
+  vertical-align: middle;
+  cursor: pointer;
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-self: flex-end;
+  margin-top: 20px;
+  gap: 10px;
+  width: 100%;
+
+  & select {
+    padding: 6px 24px;
+    border-radius: 4px;
+  }
+
+   & span {
+     font-size: 14px;
+   }
+}
+
+// POP UP
+
+/* Dropdown Button */
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  transform: rotate(-90deg);
+  display: none;
+  top: 58px;
+  left: -30px;
+  position: absolute;
+  background-color: #fff;
+  min-width: 160px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  z-index: 100;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  font-size: 11pt;
+  font-weight: 500;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #c5c5c5;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}

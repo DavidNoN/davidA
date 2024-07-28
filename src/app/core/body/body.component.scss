@@ -1,0 +1,9 @@
+.container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 0 0 30px 30px;
+  background-color: #f4f6f9;
+  width: calc(100% - 60px);
+  height: 85vh;
+}

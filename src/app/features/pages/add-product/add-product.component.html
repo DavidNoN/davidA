@@ -1,0 +1,93 @@
+<div class="container">
+  <form class="form_container" [formGroup]="productForm">
+    <div class="title">
+      <h3>Formulario de Registro</h3>
+    </div>
+    <div class="id">
+      <label for="id">ID</label>
+      <input type="text" id="id" name="id" required formControlName="id">
+      @if (productForm.get('id')?.errors?.['required'] && productForm.get('id')?.dirty) {
+        <span class="error">ID no valido!</span>
+      } @else if (productForm.get('id')?.errors?.['minlength']) {
+        <span class="error">Minimo 3 caracteres!</span>
+      } @else if (productForm.get('id')?.errors?.['maxlength']) {
+        <span class="error">Maximo 10 caracteres</span>
+      }
+    </div>
+    <div class="name">
+      <label for="name">Nombre</label>
+      <input type="text" id="name" name="nombre" required formControlName="name">
+      @if (productForm.get('name')?.errors?.['required'] && productForm.get('name')?.dirty) {
+        <span class="error">Nombre no valido!</span>
+      } @else if (productForm.get('name')?.errors?.['minlength']) {
+        <span class="error">Minimo 5 caracteres!</span>
+      } @else if (productForm.get('name')?.errors?.['maxlength']) {
+        <span class="error">Maximo 100 caracteres</span>
+      }
+    </div>
+    <div class="description">
+      <label for="description">Descripción</label>
+      <input type="text" id="description" name="descripcion" required formControlName="description">
+      @if (productForm.get('description')?.errors?.['required'] && productForm.get('description')?.dirty) {
+        <span class="error">Nombre no valido!</span>
+      } @else if (productForm.get('description')?.errors?.['minlength']) {
+        <span class="error">Minimo 10 caracteres!</span>
+      } @else if (productForm.get('description')?.errors?.['maxlength']) {
+        <span class="error">Maximo 200 caracteres</span>
+      }
+    </div>
+    <div class="logo">
+      <label for="logo">Logo</label>
+      <input type="text" id="logo" name="logo url" required formControlName="logo">
+      @if (productForm.get('logo')?.errors?.['required'] && productForm.get('logo')?.dirty) {
+        <span class="error">Logo no valido!</span>
+      }
+    </div>
+    <div class="release-date">
+      <label for="release-date">Fecha Liberación</label>
+      <input type="date" id="release-date" name="fecha-liberacion" required [min]="today().toISOString().split('T')[0]" formControlName="date_release">
+      @if (productForm.get('date_release')?.errors?.['required'] && productForm.get('date_release')?.dirty) {
+        <span class="error">Fecha de liberacion no valida!</span>
+      }
+    </div>
+    <div class="revision-date">
+      <label for="revision-date">Fecha Revisión</label>
+      <input type="date" id="revision-date" name="fecha-revision" required formControlName="date_revision">
+      @if (productForm.get('date_revision')?.errors?.['required'] && productForm.get('date_revision')?.dirty) {
+        <span class="error">Fecha de liberacion no valida!</span>
+      }
+    </div>
+    <div class="form-buttons">
+      <button type="reset" (click)="resetForm()">Reiniciar</button>
+      <button type="submit"
+              [disabled]="productForm.invalid"
+              [ngClass]="{'enabled-button': !productForm.invalid, 'disabled-button': productForm.invalid}"
+              (click)="checkIfProductExists()"
+      >
+        Enviar
+      </button>
+    </div>
+  </form>
+</div>
+@if (productAlreadyExist()) {
+  <app-modal
+    [title]="'Error Agregando Producto'"
+    [description]="'El Producto que trataste de agregar ya existe.'"
+    [buttonText]="'Cerrar'"
+    [typeModal]="ModalTypes.Error"
+    (modalActionOutput)="closeModal($event)"
+  >
+  </app-modal>
+}
+
+@if (productAlreadyExist()) {
+  <app-modal
+    [title]="'Error Agregando Producto'"
+    [description]="'Ocurrion un error procesando la solicitud: ' + errorCreatingProduct().error"
+    [buttonText]="'Cerrar'"
+    [typeModal]="ModalTypes.Error"
+    (modalActionOutput)="closeModal($event)"
+    (closeModalOutput)="closeModal($event)"
+  >
+  </app-modal>
+}

@@ -1,0 +1,9 @@
+<div class="frame">
+  <div class="modal">
+    <div class="close-modal" (click)="closeModal()">X</div>
+    <img [ngSrc]="imageUrl()" width="44" height="44"  alt="action"/>
+    <span class="title">{{title()}}</span>
+    <p>{{description()}}</p>
+    <div [ngClass]="buttonClass" (click)="modalAction()">{{buttonText()}}</div>
+  </div>
+</div>

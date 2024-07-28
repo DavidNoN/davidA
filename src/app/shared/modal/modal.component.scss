@@ -1,0 +1,141 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300);
+
+.frame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  box-shadow: 1px 2px 10px 0px rgba(0,0,0,0.3);
+  overflow: hidden;
+  background: rgba(63, 63, 63, 0.8);
+  color: #415868;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.modal {
+  width: 280px;
+  height: 210px;
+  top: 95px;
+  left: 60px;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 4px 8px 12px 0 rgba(0,0,0,0.4);
+  text-align: center;
+  overflow: hidden;
+  animation: show-modal .7s ease-in-out;
+
+  &.hide {
+    animation: hide-modal .6s ease-in-out both;
+  }
+
+  .close-modal {
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    text-align: right;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+
+  img {
+  }
+
+  .title {
+    display: block;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 400;
+    margin: 14px 0 5px 0;
+  }
+
+  p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 19px;
+    margin: 0;
+    padding: 0 30px;
+  }
+
+
+  .button {
+    height: 40px;
+    color: #fff;
+    line-height: 40px;
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 22px;
+    cursor: pointer;
+    transition: background .3s ease-in-out;
+  }
+
+  .button-error {
+    background-color: #F65656;
+
+    &:hover {
+      background-color: #EC3434;
+    }
+
+  }
+
+  .button-info {
+    background-color: #007bff;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+
+  }
+
+  .button-ok {
+    background-color: #28a745;
+
+    &:hover {
+      background-color: #218838;
+    }
+
+  }
+
+  .button-warn {
+    background-color: #ffc107;
+
+    &:hover {
+      background-color: #e0a800;
+    }
+
+  }
+
+}
+
+@keyframes show-modal {
+  0% {
+    transform: scale(0);
+  }
+  60% {
+    transform: scale(1.1);
+  }
+  80% {
+    transform: scale(.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes hide-modal {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}

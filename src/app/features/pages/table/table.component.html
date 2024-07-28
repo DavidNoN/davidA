@@ -1,0 +1,117 @@
+<div class="search-bar">
+  <input type="search" placeholder="Search..." [formControl]="searchProductControl">
+  <button class="add-button" routerLink="/add-product">Agregar</button>
+</div>
+<div class="container">
+  <div class="table-container">
+    <table>
+      <thead>
+      <tr>
+        <th>Logo</th>
+        <th>Nombre del producto</th>
+        <th>Descripción <img ngSrc="../../../../assets/icons/info.svg" class="info_icon" alt="info" height="25" width="25"/></th>
+        <th>Fecha de liberación <img ngSrc="../../../../assets/icons/info.svg" class="info_icon" alt="info" height="25" width="25"/>
+        </th>
+        <th>Fecha de reestructuración <img ngSrc="../../../../assets/icons/info.svg" class="info_icon" alt="info" height="25"
+                                           width="25"/></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (product of products(); track product.id) {
+          <tr>
+            <td>
+              <ng-container *ngIf="product.logo else logoPlaceholder">
+                <img [ngSrc]="product.logo" alt="logo" loading="lazy" width="54" height="30"/>
+              </ng-container>
+              <ng-template #logoPlaceholder>
+                <div class="logo-placeholder"></div>
+              </ng-template>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.releaseDate | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ product.revisionDate | date: 'dd/MM/yyyy' }}</td>
+            <td>
+              <div class="dropdown">
+                <span>...</span>
+                <div class="dropdown-content">
+                  <a [routerLink]="['/update-product', product.id]">Actualizar</a>
+                  <a (click)="deleteProductConfirmation(product)">Borrar</a>
+                </div>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <div class="footer">
+    <div>
+      @switch (true) {
+        @case (products().length === 0 || products().length >= 2) {
+          <span>{{ products().length }} Resultados</span>
+        }
+        @case (products().length === 1) {
+          <span>1 Resultado</span>
+        }
+        @default {
+          <span>0 Resultados</span>
+        }
+      }
+    </div>
+    <select [formControl]="productsPerViewControl">
+      <option>5</option>
+      <option>10</option>
+      <option>20</option>
+    </select>
+  </div>
+</div>
+
+@if (errorGettingProducts().isError) {
+  <app-modal
+    [title]="'Error Agregando Producto'"
+    [description]="'Ocurrion un error procesando la solicitud: ' + errorGettingProducts().error"
+    [buttonText]="'Cerrar'"
+    [typeModal]="ModalTypes.Error"
+    (modalActionOutput)="closeModal($event)"
+    (closeModalOutput)="closeModal($event)"
+  >
+  </app-modal>
+}
+
+@if (isProductRemoved().isError) {
+  <app-modal
+    [title]="'Producto Eliminado'"
+    [description]="isProductRemoved().error"
+    [buttonText]="'Ok'"
+    [typeModal]="ModalTypes.Ok"
+    (modalActionOutput)="closeModal($event)"
+    (closeModalOutput)="closeModal($event)"
+  >
+  </app-modal>
+}
+
+@if (confirmationRemoveProduct().isError) {
+  <app-modal
+    [title]="'Eliminar Producto'"
+    [description]="confirmationRemoveProduct().error"
+    [buttonText]="'Confirmar'"
+    [typeModal]="ModalTypes.Warn"
+    (modalActionOutput)="deleteProduct()"
+    (closeModalOutput)="closeModal($event)"
+  >
+  </app-modal>
+}
+
+@if (errorProductRemoved().isError) {
+  <app-modal
+    [title]="'Error Eliminando Producto'"
+    [description]="'Ocurrion un error procesando la solicitud: ' + errorGettingProducts().error"
+    [buttonText]="'Cerrar'"
+    [typeModal]="ModalTypes.Warn"
+    (modalActionOutput)="closeModal($event)"
+    (closeModalOutput)="closeModal($event)"
+  >
+  </app-modal>
+}
+
